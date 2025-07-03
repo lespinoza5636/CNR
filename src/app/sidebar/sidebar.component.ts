@@ -1,10 +1,10 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, QueryList, viewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, QueryList, signal, viewChild } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
   imports: [],
   template: `
-  <div #btnSideBar class="menu-btn sidebar-btn"  id="sidebar-btn" (click)="sideBarOpen(sideBar)">
+  <div #btnSideBar class="menu-btn sidebar-btn"  id="sidebar-btn" (click)="sideBarOpen()">
         <i class='bx bx-menu'></i>
         <i class='bx bx-x'></i>
     </div>
@@ -12,15 +12,15 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, 
         <i class='bx bx-moon'></i>
         <i class='bx bx-sun'></i>
     </div>
-    <div #sideBar class="sidebar sidebar-hidden fixed flex flex-col items-center justify-between bg-white dark:bg-gray-800" id="sidebar">
+    <div #sideBar class="sidebar z-50 sidebar-hidden fixed flex flex-col items-center justify-between bg-white dark:bg-gray-800" id="sidebar">
         <div class="header">
             <div class="menu-btn" id="menu-btn">
                 <i class='bx bx-chevron-left'></i>
             </div>
             <div class="brand">
-                <img class="brand-light" src="/brand/brand-light.svg" alt="logo">
-                <img class="brand-dark" src="/brand/brand-dark.svg" alt="logo">
-                <span>Ghostly</span>
+                <!-- <img class="brand-light" src="/brand/brand-light.svg" alt="logo"> -->
+                <img class="brand-light" src="assets/img/logo-negativo.png" alt="logo">
+                <!-- <span>UNCSM</span> -->
             </div>
         </div>
         <div class="menu-container">
@@ -28,8 +28,8 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, 
             <ul class="menu">
                 <li class="menu-item menu-item-static active">
                     <a href="#" class="menu-link">
-                        <i class='bx bx-home-alt-2'></i>
-                        <span>Home</span>
+                        <i class='bx  bx-community'  ></i> 
+                        <span>Estudiantes</span>
                     </a>
                 </li>
                 <li class="menu-item menu-item-static">
@@ -38,7 +38,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, 
                         <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="menu-item menu-item-dropdown">
+                <!-- <li class="menu-item menu-item-dropdown">
                     <a href="#" class="menu-link">
                         <i class='bx bx-shopping-bag'></i>
                         <span>Store</span>
@@ -49,7 +49,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, 
                         <li><a href="#" class="sub-menu-link">Orders</a></li>
                         <li><a href="#" class="sub-menu-link">Subscriptions</a></li>
                     </ul>
-                </li>
+                </li> -->
                 <li class="menu-item menu-item-static">
                     <a href="#" class="menu-link">
                         
@@ -57,7 +57,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, 
                         <span>Task</span>
                     </a>
                 </li>
-                <li class="menu-item menu-item-dropdown">
+                <!-- <li class="menu-item menu-item-dropdown">
                     <a href="#" class="menu-link">
                         <i class='bx  bx-folder-open'></i> 
                         <span>File</span>
@@ -67,7 +67,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, 
                         <li><a href="#" class="sub-menu-link">Images</a></li>
                         <li><a href="#" class="sub-menu-link">Audios</a></li>
                     </ul>
-                </li>
+                </li> -->
             </ul>
         </div>
         <div class="footer">
@@ -91,8 +91,8 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, 
                     
                 </div>
                 <div class="user-data">
-                    <span class="name">John Walker</span>
-                    <span class="email">jhongmail.com</span>
+                    <span class="name">CNR</span>
+                    <span class="email">Matricula</span>
                 </div>
                 <div class="user-icon">
                     <i class='bx bx-exit'></i>
@@ -100,6 +100,11 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, 
             </div>
         </div>
     </div>
+    @if(open())
+        {
+
+    <div class="h-screen bg-gray-700 opacity-90 z-20" (click)="sideBarOpen()"></div>
+        }
   `,
   styleUrl: './sidebar.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -107,20 +112,22 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, 
 export class SidebarComponent implements AfterViewInit { 
   btnSideBar= viewChild<ElementRef<HTMLDivElement>>('btnSideBar');
   sideBar = viewChild<ElementRef<HTMLDivElement>>('sideBar');
-  
+  open = signal<boolean>(true);
 
   ngAfterViewInit(): void {
 
   }
 
-  sideBarOpen(sidebar: HTMLDivElement){
+  sideBarOpen(){
     
     if(this.sideBar()?.nativeElement.classList.contains('sidebar-hidden'))
       {
+        this.open.set(true);
         this.sideBar()?.nativeElement.classList.add('sidebar-show');
         this.sideBar()?.nativeElement.classList.remove('sidebar-hidden');
       }
       else{
+        this.open.set(false);
          this.sideBar()?.nativeElement.classList.add('sidebar-hidden');
          this.sideBar()?.nativeElement.classList.remove('sidebar-show');
       }
