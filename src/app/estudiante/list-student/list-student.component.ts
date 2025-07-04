@@ -12,9 +12,10 @@ import { NativeDialogComponent } from '../../components/nativeDialog/nativeDialo
   selector: 'app-list-student',
   imports: [TableModule, PaginatorComponent, FilterComponent, DatePipe, NativeDialogComponent],
   template: `
-  <div class="flex flex-col gap-3 w-full mb-5 pb-5">
+
+  <div class="flex flex-col gap-3 w-full mb-5">
   <app-filter class="w-full" (filterOuput)="buscarDato($event)" (addOuput)="openDialog()"></app-filter>
-  <div class="card mt-10 w-full">
+  <div class="card w-full">
     <p-table [value]="studentPaginados()" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template #header>
             <tr>
@@ -44,6 +45,8 @@ import { NativeDialogComponent } from '../../components/nativeDialog/nativeDialo
 </div>
 </div>
 <app-paginator [paginas]="paginas()" [paginasPrevias]="paginasPrevias()" [paginasSiguientes]="paginasSiguientes()" (paginaActualOuput)="paginaActual.set($event)"></app-paginator>
+
+
 <app-native-dialog [buttonGuardar]="true"></app-native-dialog>
   `,
   styleUrl: './list-student.component.css',
