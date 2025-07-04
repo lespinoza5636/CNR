@@ -7,10 +7,11 @@ import { PaginatorComponent } from '../../components/paginator/paginator.compone
 import { FilterComponent } from '../../components/filter/filter.component';
 import { DatePipe } from '@angular/common';
 import { NativeDialogComponent } from '../../components/nativeDialog/nativeDialog.component';
+import { FormStudentComponent } from '../components/form-student/form-student.component';
 
 @Component({
   selector: 'app-list-student',
-  imports: [TableModule, PaginatorComponent, FilterComponent, DatePipe, NativeDialogComponent],
+  imports: [TableModule, PaginatorComponent, FilterComponent, DatePipe, NativeDialogComponent, FormStudentComponent],
   template: `
 
   <div class="flex flex-col gap-3 w-full mb-5">
@@ -47,7 +48,9 @@ import { NativeDialogComponent } from '../../components/nativeDialog/nativeDialo
 <app-paginator [paginas]="paginas()" [paginasPrevias]="paginasPrevias()" [paginasSiguientes]="paginasSiguientes()" (paginaActualOuput)="paginaActual.set($event)"></app-paginator>
 
 
-<app-native-dialog [buttonGuardar]="true"></app-native-dialog>
+<app-native-dialog [buttonGuardar]="true">
+  <app-form-student></app-form-student>
+</app-native-dialog>
   `,
   styleUrl: './list-student.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
