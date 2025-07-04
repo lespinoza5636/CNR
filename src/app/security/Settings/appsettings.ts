@@ -1,5 +1,5 @@
 export const appsettings={
-    url:"http://165.98.90.34:5030/matricula/",
+    url:"http://localhost:3000/api/matricula/",
 }
 
 /*export const appsettings={

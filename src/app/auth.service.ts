@@ -23,8 +23,8 @@ export class AuthService {
   
   getToken() {
     //const user = sessionStorage.getItem("uncsm_token");
-    const user = this.token;
-    const token: string | null =  user ? JSON.parse(user) : null;
+    const token = this.token;
+    //const token: string | null =  user ? JSON.parse(user) : null;
     return token;
   }
 

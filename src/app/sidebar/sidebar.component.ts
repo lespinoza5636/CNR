@@ -4,14 +4,14 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, 
   selector: 'app-sidebar',
   imports: [],
   template: `
-  <div #btnSideBar class="menu-btn sidebar-btn"  id="sidebar-btn" (click)="sideBarOpen()">
+  <div #btnSideBar class="menu-btn sidebar-btn fixed z-20"  id="sidebar-btn" (click)="sideBarOpen()">
         <i class='bx bx-menu'></i>
         <i class='bx bx-x'></i>
     </div>
-    <div class="dark-mode-btn" id="dark-mode-btn">
+    <!-- <div class="dark-mode-btn" id="dark-mode-btn">
         <i class='bx bx-moon'></i>
         <i class='bx bx-sun'></i>
-    </div>
+    </div> -->
     <div #sideBar class="sidebar z-50 sidebar-hidden fixed flex flex-col items-center justify-between bg-white dark:bg-gray-800" id="sidebar">
         <div class="header">
             <div class="menu-btn" id="menu-btn">
@@ -102,8 +102,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, 
     </div>
     @if(open())
         {
-
-    <div class="h-screen bg-gray-700 opacity-90 z-20" (click)="sideBarOpen()"></div>
+    <div class="h-screen bg-gray-700 opacity-90 fixed z-20 inset-0" (click)="sideBarOpen()"></div>
         }
   `,
   styleUrl: './sidebar.component.css',
@@ -112,7 +111,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, 
 export class SidebarComponent implements AfterViewInit { 
   btnSideBar= viewChild<ElementRef<HTMLDivElement>>('btnSideBar');
   sideBar = viewChild<ElementRef<HTMLDivElement>>('sideBar');
-  open = signal<boolean>(true);
+  open = signal<boolean>(false);
 
   ngAfterViewInit(): void {
 
